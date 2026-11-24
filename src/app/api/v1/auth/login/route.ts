@@ -88,7 +88,10 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     console.error('Login error:', error);
     return NextResponse.json(
-      { error: 'Authentication failed. Please try again.' },
+      {
+        error: 'Authentication failed. Please try again.',
+        details: error?.message || String(error),
+      },
       { status: 500 }
     );
   }
