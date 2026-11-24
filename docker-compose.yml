@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: nordcafe_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: norduser
+      POSTGRES_PASSWORD: nordpassword
+      POSTGRES_DB: nordcafe
+    ports:
+      - '5432:5432'
+    volumes:
+      - nordcafe_pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: nordcafe_redis
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - nordcafe_redisdata:/data
+
+volumes:
+  nordcafe_pgdata:
+  nordcafe_redisdata:

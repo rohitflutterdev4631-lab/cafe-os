@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 250, 248, 245;
+  --background-start-rgb: 12, 10, 9;
+  --background-end-rgb: 18, 15, 13;
+
+  /* Nordic Roast & Bakery Luxury Theme Variables */
+  --nordic-forest: #123D2E;
+  --nordic-deep-forest: #09291F;
+  --nordic-forest-secondary: #1C5A40;
+  --nordic-gold: #E6AD38;
+  --nordic-champagne: #D6B36A;
+  --nordic-ivory: #F7F1E5;
+  --nordic-cream: #EFE5D2;
+  --nordic-white: #FFFFFF;
+  --nordic-coffee: #563B2D;
+  --nordic-muted-green: #78917C;
+  --nordic-text-secondary: #887966;
+  --nordic-border: #E3D8C5;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Spatial Glassmorphism & Vision Pro Inspired Panels */
+.glass-panel {
+  background: rgba(22, 19, 17, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-subtle {
+  background: rgba(16, 14, 12, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-amber {
+  background: rgba(217, 119, 6, 0.12);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Modern Web Guidance: Native Dialog Scroll Containment */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+}
+
+/* Custom Dark Luxury Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(12, 10, 9, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: #3a322c;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d97706;
+}
+
+/* Print styles for Receipts and KOT */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-receipt,
+  #printable-receipt * {
+    visibility: visible;
+  }
+  #printable-receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 16px;
+    background: white;
+    color: black;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
