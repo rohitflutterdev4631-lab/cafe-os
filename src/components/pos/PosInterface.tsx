@@ -20,6 +20,9 @@ import {
   Clock,
   ChevronRight,
   Layers,
+  Maximize2,
+  Minimize2,
+  LayoutDashboard,
 } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 
@@ -48,9 +51,15 @@ interface PosInterfaceProps {
   onClose?: () => void;
   initialTableNumber?: string;
   onOrderCreated?: (order: any) => void;
+  asModal?: boolean;
 }
 
-export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: PosInterfaceProps) {
+export function PosInterface({
+  onClose,
+  initialTableNumber,
+  onOrderCreated,
+  asModal = false,
+}: PosInterfaceProps) {
   const [menuItems, setMenuItems] = useState<PosItem[]>([]);
   const [categories, setCategories] = useState<string[]>(['ALL', 'COFFEE', 'BEVERAGES', 'BAKERY', 'FOOD']);
   const [selectedCategory, setSelectedCategory] = useState('ALL');
@@ -75,6 +84,29 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
   // Variant selector modal
   const [selectedItemForVariant, setSelectedItemForVariant] = useState<PosItem | null>(null);
   const [selectedVariant, setSelectedVariant] = useState<any | null>(null);
+
+  // Fullscreen Kiosk State
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+      setIsFullscreen(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
 
   useEffect(() => {
     // Fetch live menu items
@@ -204,77 +236,107 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
     window.print();
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
-      <div className="bg-stone-900 border border-stone-800 rounded-3xl w-full max-w-7xl h-[94vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
-        {/* Top Header Bar */}
-        <div className="px-3 sm:px-6 py-2.5 sm:py-4 border-b border-stone-800 flex items-center justify-between bg-stone-950/60">
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-amber-600 flex items-center justify-center text-white shadow-lg shadow-amber-600/30 shrink-0">
-              <Coffee className="w-4 h-4 sm:w-5 sm:h-5" />
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <h1 className="font-extrabold text-sm sm:text-lg tracking-tight text-white whitespace-nowrap">CAFE OS POS</h1>
-                <span className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 whitespace-nowrap hidden xs:inline">
-                  Online
-                </span>
-              </div>
-              <p className="text-[10px] sm:text-xs text-stone-400 hidden sm:block">High-speed register & kitchen dispatch</p>
-            </div>
+  const terminalContent = (
+    <div
+      className={`flex flex-col overflow-hidden text-stone-100 ${
+        asModal
+          ? 'bg-stone-900 border border-stone-800 rounded-2xl sm:rounded-3xl w-full max-w-7xl h-[94vh] shadow-2xl animate-in zoom-in-95 duration-200'
+          : 'w-full h-full flex-1 min-h-0 bg-stone-950'
+      }`}
+    >
+      {/* Top Header Bar */}
+      <div className="px-3 sm:px-6 py-2.5 sm:py-3.5 border-b border-stone-800 flex items-center justify-between bg-stone-900/90 backdrop-blur-md shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-amber-600 flex items-center justify-center text-white shadow-lg shadow-amber-600/30 shrink-0">
+            <Coffee className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Mobile Tab Toggle Switch */}
-            <div className="flex lg:hidden items-center bg-stone-900 p-0.5 rounded-xl border border-stone-800">
-              <button
-                onClick={() => setMobilePosTab('MENU')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition ${
-                  mobilePosTab === 'MENU' ? 'bg-amber-600 text-white' : 'text-stone-400'
-                }`}
-              >
-                Catalog
-              </button>
-              <button
-                onClick={() => setMobilePosTab('CART')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 ${
-                  mobilePosTab === 'CART' ? 'bg-amber-600 text-white' : 'text-stone-400'
-                }`}
-              >
-                Cart
-                {cart.length > 0 && (
-                  <span className="w-4 h-4 rounded-full bg-amber-500 text-stone-950 text-[10px] flex items-center justify-center font-bold">
-                    {cart.reduce((sum, i) => sum + i.quantity, 0)}
-                  </span>
-                )}
-              </button>
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <h1 className="font-extrabold text-sm sm:text-base lg:text-lg tracking-tight text-white whitespace-nowrap">
+                CAFE OS POS
+              </h1>
+              <span className="text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 whitespace-nowrap hidden xs:inline">
+                Register #01 • Online
+              </span>
             </div>
-
-            {heldOrders.length > 0 && (
-              <div className="hidden sm:flex items-center gap-2">
-                <span className="text-xs text-amber-400 font-semibold">Held ({heldOrders.length}):</span>
-                {heldOrders.map((h) => (
-                  <button
-                    key={h.id}
-                    onClick={() => handleResumeOrder(h)}
-                    className="px-2.5 py-1 bg-amber-500/20 border border-amber-500/40 text-amber-300 rounded-lg text-xs hover:bg-amber-500/30 transition"
-                  >
-                    T{h.table} ({h.time})
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {onClose && (
-              <button
-                onClick={onClose}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
-              >
-                <X className="w-4 h-4 sm:w-5 sm:h-5" />
-              </button>
-            )}
+            <p className="text-[10px] sm:text-xs text-stone-400 hidden sm:block">
+              High-speed register & kitchen dispatch terminal
+            </p>
           </div>
         </div>
+
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* Mobile Tab Toggle Switch */}
+          <div className="flex lg:hidden items-center bg-stone-800/80 p-0.5 rounded-xl border border-stone-700/60">
+            <button
+              onClick={() => setMobilePosTab('MENU')}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition ${
+                mobilePosTab === 'MENU' ? 'bg-amber-600 text-white shadow' : 'text-stone-400'
+              }`}
+            >
+              Catalog
+            </button>
+            <button
+              onClick={() => setMobilePosTab('CART')}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 ${
+                mobilePosTab === 'CART' ? 'bg-amber-600 text-white shadow' : 'text-stone-400'
+              }`}
+            >
+              Cart
+              {cart.length > 0 && (
+                <span className="w-4 h-4 rounded-full bg-amber-500 text-stone-950 text-[10px] flex items-center justify-center font-bold">
+                  {cart.reduce((sum, i) => sum + i.quantity, 0)}
+                </span>
+              )}
+            </button>
+          </div>
+
+          {heldOrders.length > 0 && (
+            <div className="hidden sm:flex items-center gap-2">
+              <span className="text-xs text-amber-400 font-semibold">Held ({heldOrders.length}):</span>
+              {heldOrders.map((h) => (
+                <button
+                  key={h.id}
+                  onClick={() => handleResumeOrder(h)}
+                  className="px-2.5 py-1 bg-amber-500/20 border border-amber-500/40 text-amber-300 rounded-lg text-xs hover:bg-amber-500/30 transition"
+                >
+                  T{h.table} ({h.time})
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Fullscreen Kiosk toggle */}
+          <button
+            onClick={toggleFullscreen}
+            title={isFullscreen ? 'Exit Kiosk Fullscreen' : 'Enter Kiosk Fullscreen'}
+            className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white border border-stone-700/60 text-xs font-medium transition"
+          >
+            {isFullscreen ? <Minimize2 className="w-4 h-4 text-amber-400" /> : <Maximize2 className="w-4 h-4" />}
+            <span className="hidden md:inline">{isFullscreen ? 'Exit Kiosk' : 'Kiosk Mode'}</span>
+          </button>
+
+          {/* Close button if modal, or Return to 3D Cockpit if screen page */}
+          {asModal && onClose ? (
+            <button
+              onClick={onClose}
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
+              title="Close POS Modal"
+            >
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+          ) : onClose ? (
+            <button
+              onClick={onClose}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white border border-stone-700/60 text-xs font-medium transition"
+              title="Return to 3D Cockpit"
+            >
+              <LayoutDashboard className="w-4 h-4 text-amber-400" />
+              <span className="hidden xs:inline">3D HQ</span>
+            </button>
+          ) : null}
+        </div>
+      </div>
 
         {/* Main Content Area */}
         <div className="flex-1 flex overflow-hidden">
@@ -544,6 +606,19 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
           </div>
         </div>
       </div>
+  );
+
+  return (
+    <>
+      {asModal ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
+          {terminalContent}
+        </div>
+      ) : (
+        <div className="w-full h-full flex-1 flex flex-col min-h-0 overflow-hidden bg-stone-950">
+          {terminalContent}
+        </div>
+      )}
 
       {/* Payment Checkout Modal */}
       {showPaymentModal && (
@@ -710,6 +785,6 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

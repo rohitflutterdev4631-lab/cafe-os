@@ -8,8 +8,11 @@ export default function PosPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-stone-950 p-2 sm:p-4">
-      <PosInterface onClose={() => router.push('/dashboard')} />
+    <div className="w-full h-full flex-1 flex flex-col min-h-0 overflow-hidden">
+      <PosInterface
+        asModal={false}
+        onClose={() => router.push('/dashboard')}
+      />
     </div>
   );
 }

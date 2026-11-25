@@ -119,7 +119,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     );
   }
 
-  const isOverviewPage = pathname === '/dashboard';
+  const isFullScreenPage = pathname === '/dashboard' || pathname === '/dashboard/pos';
 
   return (
     <div className="min-h-screen bg-[#0C0A09] text-stone-100 flex overflow-hidden">
@@ -145,8 +145,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           onToggleSidebar={() => setMobileMenuOpen(true)}
         />
 
-        {isOverviewPage ? (
-          <main className="flex-1 overflow-hidden relative">
+        {isFullScreenPage ? (
+          <main className="flex-1 overflow-hidden relative flex flex-col">
             {children}
           </main>
         ) : (

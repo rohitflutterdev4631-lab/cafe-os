@@ -438,6 +438,7 @@ export default function DashboardPage() {
       {/* Floating Operational Modals */}
       {activeModule === 'POS' && (
         <PosInterface
+          asModal={true}
           initialTableNumber={posInitialTable}
           onClose={() => {
             setActiveModule(null);
