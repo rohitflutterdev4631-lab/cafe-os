@@ -109,7 +109,20 @@ export function PosInterface({
   }, []);
 
   useEffect(() => {
-    // Fetch live menu items
+    // Instant zero-latency paint from cache on reloads
+    try {
+      const cached = sessionStorage.getItem('pos_menu_items_cache');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setMenuItems(parsed);
+          const cats: string[] = Array.from(new Set<string>(parsed.map((i: any) => (i.category?.name as string) || 'COFFEE')));
+          setCategories(['ALL', ...cats]);
+        }
+      }
+    } catch {}
+
+    // Fetch live menu items and refresh cache
     fetch('/api/v1/menu-items')
       .then((res) => res.json())
       .then((data) => {
@@ -117,6 +130,9 @@ export function PosInterface({
           setMenuItems(data.items);
           const cats: string[] = Array.from(new Set<string>(data.items.map((i: any) => (i.category?.name as string) || 'COFFEE')));
           setCategories(['ALL', ...cats]);
+          try {
+            sessionStorage.setItem('pos_menu_items_cache', JSON.stringify(data.items));
+          } catch {}
         }
       })
       .catch(() => {});

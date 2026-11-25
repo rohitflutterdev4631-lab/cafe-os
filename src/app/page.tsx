@@ -47,6 +47,14 @@ const CafeCanvas = dynamic(
 
 export default function CafeOsHomePage() {
   const [activePreset, setActivePreset] = useState('OVERVIEW');
+  const [sceneQuality, setSceneQuality] = useState<'high' | 'medium' | 'low'>('medium');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 768;
+      setSceneQuality(isMobile ? 'low' : 'medium');
+    }
+  }, []);
 
   const demoTables = [
     {
@@ -261,7 +269,7 @@ export default function CafeOsHomePage() {
               onSelectTable={() => setActivePreset('DINING_FLOOR')}
               tables={demoTables}
               metrics={{ activeOrdersCount: 4, lowStockCount: 2, reservationCount: 3 }}
-              quality="high"
+              quality={sceneQuality}
             />
           </div>
         </div>

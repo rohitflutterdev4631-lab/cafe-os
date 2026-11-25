@@ -45,7 +45,16 @@ export async function GET(
       },
     });
 
-    return NextResponse.json({ success: true, categories });
+    return NextResponse.json(
+      { success: true, categories },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+          'CDN-Cache-Control': 'public, s-maxage=120',
+          'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
+        },
+      }
+    );
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch menu' }, { status: 500 });
   }
