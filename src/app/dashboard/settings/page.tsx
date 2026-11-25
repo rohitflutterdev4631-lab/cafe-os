@@ -76,7 +76,7 @@ export default function DashboardSettingsPage() {
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* Branding & Profile */}
-        <div className="bg-stone-900/90 p-6 rounded-2xl border border-stone-800 shadow-xl space-y-4">
+        <div className="bg-stone-900/90 p-4 sm:p-6 rounded-2xl border border-stone-800 shadow-xl space-y-4">
           <h2 className="text-base font-bold text-stone-100 border-b border-stone-800 pb-3">
             Restaurant Identity & Branding
           </h2>
@@ -152,7 +152,7 @@ export default function DashboardSettingsPage() {
         </div>
 
         {/* Taxes & Ordering Rules */}
-        <div className="bg-stone-900/90 p-6 rounded-2xl border border-stone-800 shadow-xl space-y-4">
+        <div className="bg-stone-900/90 p-4 sm:p-6 rounded-2xl border border-stone-800 shadow-xl space-y-4">
           <h2 className="text-base font-bold text-stone-100 border-b border-stone-800 pb-3">
             Taxation, Fees & Ordering Controls
           </h2>
@@ -224,7 +224,7 @@ export default function DashboardSettingsPage() {
         </div>
 
         {/* Legal & Compliance */}
-        <div className="bg-stone-900/90 p-6 rounded-2xl border border-stone-800 shadow-xl space-y-4">
+        <div className="bg-stone-900/90 p-4 sm:p-6 rounded-2xl border border-stone-800 shadow-xl space-y-4">
           <h2 className="text-base font-bold text-stone-100 border-b border-stone-800 pb-3">
             Business Compliance & Licenses
           </h2>

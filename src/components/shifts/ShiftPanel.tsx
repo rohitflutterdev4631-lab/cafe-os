@@ -117,37 +117,48 @@ export function ShiftPanel({ onClose }: ShiftPanelProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
-      <div className="bg-stone-900 border border-stone-800 rounded-3xl w-full max-w-5xl h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
+      <div className="bg-stone-900 border border-stone-800 rounded-2xl sm:rounded-3xl w-full max-w-5xl h-[94vh] sm:h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-stone-800 flex items-center justify-between bg-stone-950/70">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-lg shadow-teal-600/30">
-              <Shield className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-lg text-white tracking-tight">
-                  CASH DRAWER & SHIFT RECONCILIATION
-                </h1>
-                <span
-                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                    activeShift
-                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                      : 'bg-stone-800 text-stone-400'
-                  }`}
-                >
-                  {activeShift ? 'Shift Active' : 'No Active Shift'}
-                </span>
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-stone-850 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-stone-950/70">
+          <div className="flex items-center justify-between gap-3 min-w-0">
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-lg shadow-teal-600/30 shrink-0">
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <p className="text-xs text-stone-400">Cash drawer float verification, end-of-day reconciliation, & audit trails</p>
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <h1 className="font-extrabold text-sm sm:text-lg text-white tracking-tight whitespace-nowrap">
+                    CASH DRAWER
+                  </h1>
+                  <span
+                    className={`text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full whitespace-nowrap ${
+                      activeShift
+                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                        : 'bg-stone-800 text-stone-400'
+                    }`}
+                  >
+                    {activeShift ? 'Active' : 'No Shift'}
+                  </span>
+                </div>
+                <p className="text-[10px] sm:text-xs text-stone-400 truncate hidden sm:block">Cash drawer float verification, end-of-day reconciliation, & audit trails</p>
+              </div>
             </div>
+
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="sm:hidden w-8 h-8 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition shrink-0"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {!activeShift ? (
               <button
                 onClick={() => setShowOpenModal(true)}
-                className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs rounded-xl shadow-md transition flex items-center gap-1.5"
+                className="flex-1 sm:flex-initial px-3 sm:px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-[11px] sm:text-xs rounded-xl shadow-md transition flex items-center justify-center gap-1.5 whitespace-nowrap"
               >
                 <Unlock className="w-3.5 h-3.5" /> Start New Shift
               </button>
@@ -157,16 +168,16 @@ export function ShiftPanel({ onClose }: ShiftPanelProps) {
                   setActualCash(activeShift.openingCash + activeShift.cashSales);
                   setShowCloseModal(true);
                 }}
-                className="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-xs rounded-xl shadow-md transition flex items-center gap-1.5"
+                className="flex-1 sm:flex-initial px-3 sm:px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-[11px] sm:text-xs rounded-xl shadow-md transition flex items-center justify-center gap-1.5 whitespace-nowrap"
               >
-                <Lock className="w-3.5 h-3.5" /> Reconcile & Close Shift
+                <Lock className="w-3.5 h-3.5" /> Close Shift
               </button>
             )}
 
             {onClose && (
               <button
                 onClick={onClose}
-                className="w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
+                className="hidden sm:flex w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 items-center justify-center text-stone-400 hover:text-white transition shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>

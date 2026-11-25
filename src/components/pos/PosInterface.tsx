@@ -63,6 +63,7 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
   const [discountAmount, setDiscountAmount] = useState<number>(0);
   const [couponCode, setCouponCode] = useState('');
   const [heldOrders, setHeldOrders] = useState<{ id: string; time: string; cart: CartItem[]; table: string }[]>([]);
+  const [mobilePosTab, setMobilePosTab] = useState<'MENU' | 'CART'>('MENU');
 
   // Payment Modal State
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -207,25 +208,50 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
       <div className="bg-stone-900 border border-stone-800 rounded-3xl w-full max-w-7xl h-[94vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
         {/* Top Header Bar */}
-        <div className="px-6 py-4 border-b border-stone-800 flex items-center justify-between bg-stone-950/60">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-amber-600 flex items-center justify-center text-white shadow-lg shadow-amber-600/30">
-              <Coffee className="w-5 h-5" />
+        <div className="px-3 sm:px-6 py-2.5 sm:py-4 border-b border-stone-800 flex items-center justify-between bg-stone-950/60">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-amber-600 flex items-center justify-center text-white shadow-lg shadow-amber-600/30 shrink-0">
+              <Coffee className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-lg tracking-tight text-white">CAFE OS POS</h1>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                  Terminal Online
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <h1 className="font-extrabold text-sm sm:text-lg tracking-tight text-white whitespace-nowrap">CAFE OS POS</h1>
+                <span className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 whitespace-nowrap hidden xs:inline">
+                  Online
                 </span>
               </div>
-              <p className="text-xs text-stone-400">High-speed register & kitchen dispatch</p>
+              <p className="text-[10px] sm:text-xs text-stone-400 hidden sm:block">High-speed register & kitchen dispatch</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Mobile Tab Toggle Switch */}
+            <div className="flex lg:hidden items-center bg-stone-900 p-0.5 rounded-xl border border-stone-800">
+              <button
+                onClick={() => setMobilePosTab('MENU')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition ${
+                  mobilePosTab === 'MENU' ? 'bg-amber-600 text-white' : 'text-stone-400'
+                }`}
+              >
+                Catalog
+              </button>
+              <button
+                onClick={() => setMobilePosTab('CART')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 ${
+                  mobilePosTab === 'CART' ? 'bg-amber-600 text-white' : 'text-stone-400'
+                }`}
+              >
+                Cart
+                {cart.length > 0 && (
+                  <span className="w-4 h-4 rounded-full bg-amber-500 text-stone-950 text-[10px] flex items-center justify-center font-bold">
+                    {cart.reduce((sum, i) => sum + i.quantity, 0)}
+                  </span>
+                )}
+              </button>
+            </div>
+
             {heldOrders.length > 0 && (
-              <div className="flex items-center gap-2">
+              <div className="hidden sm:flex items-center gap-2">
                 <span className="text-xs text-amber-400 font-semibold">Held ({heldOrders.length}):</span>
                 {heldOrders.map((h) => (
                   <button
@@ -242,9 +268,9 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
             {onClose && (
               <button
                 onClick={onClose}
-                className="w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             )}
           </div>
@@ -252,18 +278,18 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
 
         {/* Main Content Area */}
         <div className="flex-1 flex overflow-hidden">
-          {/* Left Column: Menu Browser (65%) */}
-          <div className="flex-1 flex flex-col border-r border-stone-800 bg-stone-900/50">
+          {/* Left Column: Menu Browser (65% on Desktop, Full on Mobile) */}
+          <div className={`flex-1 flex flex-col border-r border-stone-800 bg-stone-900/50 ${mobilePosTab === 'CART' ? 'hidden lg:flex' : 'flex'}`}>
             {/* Search and Category Filters */}
-            <div className="p-4 border-b border-stone-800 space-y-3">
+            <div className="p-3 sm:p-4 border-b border-stone-800 space-y-2.5 sm:space-y-3">
               <div className="relative">
-                <Search className="w-4 h-4 absolute left-3.5 top-3 text-stone-400" />
+                <Search className="w-4 h-4 absolute left-3.5 top-2.5 sm:top-3 text-stone-400" />
                 <input
                   type="text"
-                  placeholder="Quick search dishes or SKU (e.g., Espresso, Sourdough)..."
+                  placeholder="Quick search dishes or SKU..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-stone-800/80 border border-stone-700 rounded-xl text-sm text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500"
+                  className="w-full pl-10 pr-4 py-1.5 sm:py-2 bg-stone-800/80 border border-stone-700 rounded-xl text-xs sm:text-sm text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500"
                 />
               </div>
 
@@ -273,7 +299,7 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
+                    className={`px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold whitespace-nowrap transition shrink-0 ${
                       selectedCategory === cat
                         ? 'bg-amber-600 text-white shadow-md shadow-amber-600/30'
                         : 'bg-stone-800/70 text-stone-400 hover:bg-stone-800 hover:text-stone-200'
@@ -286,7 +312,7 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
             </div>
 
             {/* Menu Items Grid */}
-            <div className="flex-1 overflow-y-auto p-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
               {filteredItems.map((item) => (
                 <div
                   key={item.id}
@@ -298,11 +324,11 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
                       addItemToCart(item);
                     }
                   }}
-                  className="bg-stone-800/60 border border-stone-700/60 hover:border-amber-500/60 rounded-2xl p-3 flex flex-col justify-between cursor-pointer hover:bg-stone-800 transition duration-150 group shadow-sm"
+                  className="bg-stone-800/60 border border-stone-700/60 hover:border-amber-500/60 rounded-2xl p-2.5 sm:p-3 flex flex-col justify-between cursor-pointer hover:bg-stone-800 transition duration-150 group shadow-sm"
                 >
                   <div>
-                    <div className="flex items-start justify-between gap-1 mb-1.5">
-                      <span className="font-bold text-sm text-stone-100 group-hover:text-amber-400 transition leading-snug">
+                    <div className="flex items-start justify-between gap-1 mb-1 sm:mb-1.5">
+                      <span className="font-bold text-xs sm:text-sm text-stone-100 group-hover:text-amber-400 transition leading-snug">
                         {item.name}
                       </span>
                       <span
@@ -311,26 +337,54 @@ export function PosInterface({ onClose, initialTableNumber, onOrderCreated }: Po
                         }`}
                       />
                     </div>
-                    <span className="text-[11px] text-stone-400 line-clamp-2">
+                    <span className="text-[10px] sm:text-[11px] text-stone-400 line-clamp-2">
                       {(item as any).description || 'Artisanal cafe creation'}
                     </span>
                   </div>
 
-                  <div className="mt-3 flex items-center justify-between pt-2 border-t border-stone-700/40">
-                    <span className="font-extrabold text-sm text-stone-200">
+                  <div className="mt-2.5 sm:mt-3 flex items-center justify-between pt-2 border-t border-stone-700/40">
+                    <span className="font-extrabold text-xs sm:text-sm text-stone-200">
                       ₹{item.basePrice}
                     </span>
-                    <button className="w-7 h-7 rounded-lg bg-amber-600/20 text-amber-400 group-hover:bg-amber-600 group-hover:text-white flex items-center justify-center transition">
-                      <Plus className="w-4 h-4" />
+                    <button className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-amber-600/20 text-amber-400 group-hover:bg-amber-600 group-hover:text-white flex items-center justify-center transition">
+                      <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </button>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* Mobile View Order Floating Bar */}
+            {cart.length > 0 && (
+              <div className="lg:hidden p-3 border-t border-stone-800 bg-stone-950/95 sticky bottom-0 z-20">
+                <button
+                  onClick={() => setMobilePosTab('CART')}
+                  className="w-full py-2.5 px-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-extrabold text-xs rounded-xl shadow-lg flex items-center justify-between"
+                >
+                  <span className="flex items-center gap-2">
+                    <ShoppingCart className="w-4 h-4" />
+                    <span>View Ticket ({cart.reduce((sum, i) => sum + i.quantity, 0)} items)</span>
+                  </span>
+                  <span className="font-mono text-sm font-black">₹{grandTotal} →</span>
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* Right Column: Active Cart & Register (35%) */}
-          <div className="w-96 flex flex-col bg-stone-950/80">
+          {/* Right Column: Active Cart & Register (35% on Desktop, Full on Mobile) */}
+          <div className={`w-full lg:w-96 flex flex-col bg-stone-950/80 ${mobilePosTab === 'MENU' ? 'hidden lg:flex' : 'flex'}`}>
+            {/* Mobile Back Button to Dish Menu */}
+            <div className="lg:hidden px-4 pt-3 pb-2 border-b border-stone-800 flex items-center justify-between bg-stone-900/40">
+              <button
+                onClick={() => setMobilePosTab('MENU')}
+                className="flex items-center gap-1.5 text-xs text-amber-400 font-extrabold hover:text-amber-300"
+              >
+                ← Back to Menu Catalog
+              </button>
+              <span className="text-[11px] text-stone-400 font-mono">
+                {cart.reduce((sum, i) => sum + i.quantity, 0)} items in ticket
+              </span>
+            </div>
             {/* Order Configuration Bar */}
             <div className="p-4 border-b border-stone-800 space-y-3">
               <div className="grid grid-cols-3 gap-1 bg-stone-900 p-1 rounded-xl">

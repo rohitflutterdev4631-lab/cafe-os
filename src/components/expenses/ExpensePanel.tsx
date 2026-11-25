@@ -105,32 +105,43 @@ export function ExpensePanel({ onClose }: ExpensePanelProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
-      <div className="bg-stone-900 border border-stone-800 rounded-3xl w-full max-w-6xl h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
+      <div className="bg-stone-900 border border-stone-800 rounded-2xl sm:rounded-3xl w-full max-w-6xl h-[94vh] sm:h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-stone-800 flex items-center justify-between bg-stone-950/70">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-rose-600 flex items-center justify-center text-white shadow-lg shadow-rose-600/30">
-              <DollarSign className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-lg text-white tracking-tight">
-                  EXPENSES & PROFITABILITY (P&L)
-                </h1>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                  Real COGS vs Net Profit
-                </span>
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-stone-850 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-stone-950/70">
+          <div className="flex items-center justify-between gap-3 min-w-0">
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-rose-600 flex items-center justify-center text-white shadow-lg shadow-rose-600/30 shrink-0">
+                <DollarSign className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <p className="text-xs text-stone-400">
-                Operating expenditures, commercial lease, utility bills, & true net margins
-              </p>
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <h1 className="font-extrabold text-sm sm:text-lg text-white tracking-tight whitespace-nowrap">
+                    EXPENSES & PROFIT
+                  </h1>
+                  <span className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 whitespace-nowrap">
+                    P&L
+                  </span>
+                </div>
+                <p className="text-[10px] sm:text-xs text-stone-400 truncate hidden sm:block">
+                  Operating expenditures, commercial lease, utility bills, & true net margins
+                </p>
+              </div>
             </div>
+
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="sm:hidden w-8 h-8 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition shrink-0"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <button
               onClick={() => setShowAddModal(true)}
-              className="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-xs rounded-xl shadow-md transition flex items-center gap-1.5"
+              className="flex-1 sm:flex-initial px-3 sm:px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-[11px] sm:text-xs rounded-xl shadow-md transition flex items-center justify-center gap-1.5 whitespace-nowrap"
             >
               <Plus className="w-3.5 h-3.5" /> Record Expense
             </button>
@@ -138,7 +149,7 @@ export function ExpensePanel({ onClose }: ExpensePanelProps) {
             {onClose && (
               <button
                 onClick={onClose}
-                className="w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
+                className="hidden sm:flex w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 items-center justify-center text-stone-400 hover:text-white transition shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -148,41 +159,39 @@ export function ExpensePanel({ onClose }: ExpensePanelProps) {
 
         {/* 30-Day Financial Performance Ribbon */}
         {summary && (
-          <div className="p-4 grid grid-cols-2 md:grid-cols-4 gap-3 border-b border-stone-800 bg-stone-950/40">
-            <div className="bg-stone-900/80 p-3 rounded-2xl border border-stone-800">
-              <span className="text-[10px] uppercase font-bold text-stone-500">Gross 30D Revenue</span>
-              <div className="text-lg font-extrabold text-white mt-0.5 font-mono">
+          <div className="p-3 sm:p-4 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 border-b border-stone-850 bg-stone-950/40">
+            <div className="bg-stone-900/80 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-stone-800">
+              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-stone-500">Gross 30D</span>
+              <div className="text-base sm:text-lg font-extrabold text-white mt-0.5 font-mono">
                 ₹{summary.totalRevenue.toLocaleString()}
               </div>
             </div>
 
-            <div className="bg-stone-900/80 p-3 rounded-2xl border border-stone-800">
-              <span className="text-[10px] uppercase font-bold text-stone-500">Est. Raw COGS</span>
-              <div className="text-lg font-extrabold text-amber-400 mt-0.5 font-mono">
-                -₹{summary.estimatedCogs.toLocaleString()}{' '}
-                <span className="text-xs font-normal text-stone-400">({summary.grossMarginPercent}% gross)</span>
+            <div className="bg-stone-900/80 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-stone-800">
+              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-stone-500">Est. Raw COGS</span>
+              <div className="text-base sm:text-lg font-extrabold text-amber-400 mt-0.5 font-mono">
+                -₹{summary.estimatedCogs.toLocaleString()}
               </div>
             </div>
 
-            <div className="bg-stone-900/80 p-3 rounded-2xl border border-stone-800">
-              <span className="text-[10px] uppercase font-bold text-stone-500">Fixed Operating Exp</span>
-              <div className="text-lg font-extrabold text-rose-400 mt-0.5 font-mono">
+            <div className="bg-stone-900/80 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-stone-800">
+              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-stone-500">Operating Exp</span>
+              <div className="text-base sm:text-lg font-extrabold text-rose-400 mt-0.5 font-mono">
                 -₹{summary.totalExpenses.toLocaleString()}
               </div>
             </div>
 
-            <div className="bg-stone-900/80 p-3 rounded-2xl border border-emerald-500/30">
-              <span className="text-[10px] uppercase font-bold text-emerald-400">Estimated Net Profit</span>
-              <div className="text-lg font-extrabold text-emerald-400 mt-0.5 font-mono">
-                ₹{summary.netProfit.toLocaleString()}{' '}
-                <span className="text-xs font-normal text-emerald-300">({summary.netMarginPercent}% net)</span>
+            <div className="bg-stone-900/80 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-emerald-500/30">
+              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-emerald-400">Est. Net Profit</span>
+              <div className="text-base sm:text-lg font-extrabold text-emerald-400 mt-0.5 font-mono">
+                ₹{summary.netProfit.toLocaleString()}
               </div>
             </div>
           </div>
         )}
 
         {/* Expenses List */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
           <div className="bg-stone-950/60 rounded-2xl border border-stone-800 overflow-hidden shadow">
             <table className="w-full text-left text-xs text-stone-300">
               <thead className="bg-stone-900/90 text-stone-400 uppercase tracking-wider text-[10px] border-b border-stone-800">

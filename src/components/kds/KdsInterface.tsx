@@ -99,32 +99,43 @@ export function KdsInterface({ onClose, onOrderUpdated }: KdsInterfaceProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
-      <div className="bg-stone-950 border border-stone-800 rounded-3xl w-full max-w-7xl h-[94vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
+      <div className="bg-stone-950 border border-stone-800 rounded-2xl sm:rounded-3xl w-full max-w-7xl h-[94vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-stone-800 flex items-center justify-between bg-stone-900/70">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-orange-600 flex items-center justify-center text-white shadow-lg shadow-orange-600/30">
-              <ChefHat className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-lg text-white tracking-tight">KITCHEN KDS DISPLAY</h1>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/30">
-                  {orders.length} Active Orders
-                </span>
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-stone-850 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-stone-900/70">
+          <div className="flex items-center justify-between gap-3 min-w-0">
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-orange-600 flex items-center justify-center text-white shadow-lg shadow-orange-600/30 shrink-0">
+                <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <p className="text-xs text-stone-400">Live order ticket sequence & preparation timing</p>
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <h1 className="font-extrabold text-sm sm:text-lg text-white tracking-tight whitespace-nowrap">KDS TICKETS</h1>
+                  <span className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/30 whitespace-nowrap">
+                    {orders.length} Active
+                  </span>
+                </div>
+                <p className="text-[10px] sm:text-xs text-stone-400 truncate hidden sm:block">Live order ticket sequence & preparation timing</p>
+              </div>
             </div>
+
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="md:hidden w-8 h-8 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition shrink-0"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar shrink-0">
             {/* Filter buttons */}
-            <div className="flex items-center bg-stone-900 p-1 rounded-xl border border-stone-800">
+            <div className="flex items-center bg-stone-900 p-0.5 sm:p-1 rounded-xl border border-stone-800 shrink-0">
               {(['ALL', 'PENDING', 'PREPARING', 'READY'] as const).map((s) => (
                 <button
                   key={s}
                   onClick={() => setStatusFilter(s)}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
+                  className={`px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition whitespace-nowrap ${
                     statusFilter === s
                       ? 'bg-amber-600 text-white'
                       : 'text-stone-400 hover:text-stone-200'
@@ -137,7 +148,7 @@ export function KdsInterface({ onClose, onOrderUpdated }: KdsInterfaceProps) {
 
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
-              className="p-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-400 hover:text-white transition"
+              className="p-1.5 sm:p-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-400 hover:text-white transition shrink-0"
               title="Toggle Audio Alerts"
             >
               {soundEnabled ? <Volume2 className="w-4 h-4 text-emerald-400" /> : <VolumeX className="w-4 h-4 text-stone-500" />}
@@ -145,7 +156,7 @@ export function KdsInterface({ onClose, onOrderUpdated }: KdsInterfaceProps) {
 
             <button
               onClick={fetchLiveOrders}
-              className="p-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-400 hover:text-white transition"
+              className="p-1.5 sm:p-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-400 hover:text-white transition shrink-0"
               title="Refresh Queue"
             >
               <RefreshCw className="w-4 h-4" />
@@ -154,7 +165,7 @@ export function KdsInterface({ onClose, onOrderUpdated }: KdsInterfaceProps) {
             {onClose && (
               <button
                 onClick={onClose}
-                className="w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
+                className="hidden md:flex w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 items-center justify-center text-stone-400 hover:text-white transition shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>

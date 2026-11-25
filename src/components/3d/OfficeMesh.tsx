@@ -210,21 +210,21 @@ export function OfficeMesh({ onSelectZone }: OfficeMeshProps) {
         {/* Vision Pro Spatial Context Card */}
         <Html position={[0, 2.4, 0]} center distanceFactor={22}>
           <div
-            className={`pointer-events-none transition-all duration-300 transform ${
-              hovered ? 'scale-110 -translate-y-1' : 'scale-100'
+            className={`pointer-events-none transition-all duration-300 transform select-none scale-[0.65] sm:scale-80 md:scale-95 lg:scale-100 origin-center ${
+              hovered ? 'scale-110 -translate-y-1' : ''
             }`}
           >
-            <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-stone-950/90 text-stone-100 backdrop-blur-md border border-amber-500/40 shadow-xl">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg sm:rounded-xl bg-stone-950/90 text-stone-100 backdrop-blur-md border border-amber-500/40 shadow-xl whitespace-nowrap">
+              <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
               <div>
-                <div className="font-extrabold text-[11px] tracking-wide text-white">
-                  EXECUTIVE OFFICE & AI CO-PILOT
+                <div className="font-extrabold text-[9px] sm:text-[11px] tracking-wide text-white">
+                  <span className="hidden sm:inline">EXECUTIVE </span>OFFICE & AI
                 </div>
-                <div className="text-[9px] text-amber-300/90 font-mono">
+                <div className="text-[8px] sm:text-[9px] text-amber-300/90 font-mono hidden sm:block">
                   Postgres BI & Automation
                 </div>
               </div>
-              <span className="text-[9px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded-md font-mono font-bold border border-amber-500/30">
+              <span className="hidden md:inline text-[9px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded-md font-mono font-bold border border-amber-500/30">
                 ENTER
               </span>
             </div>

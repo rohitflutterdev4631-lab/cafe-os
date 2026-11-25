@@ -197,30 +197,35 @@ export function DiningAreaMesh({ tables, onSelectTable }: DiningAreaMeshProps) {
             {/* Spatial Context Card (Apple Vision Pro Style Glass Badge) */}
             <Html position={[0, 1.4, 0]} center distanceFactor={22}>
               <div
-                className={`cursor-pointer transition-all duration-300 transform select-none ${
-                  isHovered ? 'scale-110 -translate-y-1' : 'scale-100 opacity-95'
+                className={`cursor-pointer transition-all duration-300 transform select-none scale-[0.62] sm:scale-80 md:scale-95 lg:scale-100 origin-center ${
+                  isHovered ? 'scale-110 -translate-y-1' : 'opacity-95'
                 }`}
               >
                 <div
-                  className={`flex flex-col items-center px-2.5 py-1 rounded-xl ${badgeBg} backdrop-blur-md border shadow-lg`}
+                  className={`flex flex-col items-center px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-lg sm:rounded-xl ${badgeBg} backdrop-blur-md border shadow-lg whitespace-nowrap`}
                 >
-                  <div className="flex items-center gap-1.5">
-                    <span className={`w-1.5 h-1.5 rounded-full ${statusDot} ${isOccupied ? 'animate-pulse' : ''}`} />
-                    <span className="font-extrabold text-[11px] tracking-tight">Table {table.tableNumber}</span>
-                    <span className="text-[9px] text-stone-400">({table.capacity}p)</span>
+                  <div className="flex items-center gap-1 sm:gap-1.5">
+                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot} ${isOccupied ? 'animate-pulse' : ''}`} />
+                    <span className="font-extrabold text-[10px] sm:text-[11px] tracking-tight">
+                      <span className="hidden sm:inline">Table </span>T{table.tableNumber}
+                    </span>
+                    <span className="text-[8px] sm:text-[9px] text-stone-400 hidden sm:inline">({table.capacity}p)</span>
                   </div>
 
                   {isOccupied && table.currentOrder ? (
-                    <div className="text-[9px] text-amber-300 font-mono mt-0.5 font-bold">
-                      ₹{table.currentOrder.totalAmount} • {table.currentOrder.durationMinutes}m
+                    <div className="text-[8px] sm:text-[9px] text-amber-300 font-mono font-bold">
+                      ₹{table.currentOrder.totalAmount}
+                      <span className="hidden sm:inline"> • {table.currentOrder.durationMinutes}m</span>
                     </div>
                   ) : table.status === 'AVAILABLE' ? (
-                    <span className="text-[8px] text-emerald-400 uppercase tracking-widest font-bold">
-                      Available
+                    <span className="text-[7px] sm:text-[8px] text-emerald-400 uppercase tracking-widest font-bold">
+                      <span className="sm:hidden">Free</span>
+                      <span className="hidden sm:inline">Available</span>
                     </span>
                   ) : (
-                    <span className="text-[8px] text-blue-300 uppercase tracking-widest font-bold">
-                      Reserved
+                    <span className="text-[7px] sm:text-[8px] text-blue-300 uppercase tracking-widest font-bold">
+                      <span className="sm:hidden">Res</span>
+                      <span className="hidden sm:inline">Reserved</span>
                     </span>
                   )}
                 </div>

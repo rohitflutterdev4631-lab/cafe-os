@@ -282,7 +282,7 @@ export default function DashboardMenuPage() {
         </div>
 
         {/* Category Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 max-w-full text-xs">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 max-w-full text-xs">
           <button
             onClick={() => setSelectedCatId('ALL')}
             className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition ${

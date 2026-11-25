@@ -104,46 +104,46 @@ export function AiCafeAssistant({ onClose }: AiCafeAssistantProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
-      <div className="bg-stone-900 border border-stone-800 rounded-3xl w-full max-w-4xl h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
+      <div className="bg-stone-900 border border-stone-800 rounded-2xl sm:rounded-3xl w-full max-w-4xl h-[94vh] sm:h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-stone-800 flex items-center justify-between bg-stone-950/70">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-purple-600/30">
-              <Sparkles className="w-5 h-5" />
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-stone-850 flex items-center justify-between bg-stone-950/70">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-purple-600/30 shrink-0">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-lg text-white tracking-tight">
-                  CAFE OS AI BUSINESS ASSISTANT
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <h1 className="font-extrabold text-sm sm:text-lg text-white tracking-tight whitespace-nowrap">
+                  AI ASSISTANT
                 </h1>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                  Postgres Live Grounded
+                <span className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 whitespace-nowrap hidden xs:inline">
+                  Live Grounded
                 </span>
               </div>
-              <p className="text-xs text-stone-400">Natural-language reporting, margin analysis, & campaign generation</p>
+              <p className="text-[10px] sm:text-xs text-stone-400 truncate hidden sm:block">Natural-language reporting, margin analysis, & campaign generation</p>
             </div>
           </div>
 
           {onClose && (
             <button
               onClick={onClose}
-              className="w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition shrink-0"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           )}
         </div>
 
         {/* Preset Query Chips */}
-        <div className="px-6 py-2.5 border-b border-stone-800/80 bg-stone-950/40 flex items-center gap-2 overflow-x-auto no-scrollbar">
-          <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider shrink-0">
+        <div className="px-3 sm:px-6 py-2 sm:py-2.5 border-b border-stone-800/80 bg-stone-950/40 flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar">
+          <span className="text-[10px] sm:text-[11px] font-semibold text-stone-500 uppercase tracking-wider shrink-0 hidden sm:inline">
             Quick Queries:
           </span>
           {PRESET_QUERIES.map((q, idx) => (
             <button
               key={idx}
               onClick={() => handleSendMessage(q)}
-              className="px-3 py-1 bg-stone-800/80 hover:bg-stone-750 text-stone-300 hover:text-amber-300 text-xs rounded-xl border border-stone-700/60 whitespace-nowrap transition"
+              className="px-2.5 sm:px-3 py-1 bg-stone-800/80 hover:bg-stone-750 text-stone-300 hover:text-amber-300 text-[11px] sm:text-xs rounded-xl border border-stone-700/60 whitespace-nowrap transition shrink-0"
             >
               {q}
             </button>
@@ -151,7 +151,7 @@ export function AiCafeAssistant({ onClose }: AiCafeAssistantProps) {
         </div>
 
         {/* Messages Stream */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-3 sm:space-y-4">
           {messages.map((msg) => (
             <div
               key={msg.id}

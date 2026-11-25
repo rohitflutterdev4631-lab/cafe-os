@@ -124,21 +124,21 @@ export function KitchenMesh({ onSelectZone, activeOrdersCount = 4 }: KitchenMesh
         {/* Floating Spatial Label */}
         <Html position={[0, 2.8, 0]} center distanceFactor={22}>
           <div
-            className={`pointer-events-none transition-all duration-300 transform select-none ${
-              hovered ? 'scale-110 -translate-y-1' : 'scale-100 opacity-95'
+            className={`pointer-events-none transition-all duration-300 transform select-none scale-[0.65] sm:scale-80 md:scale-95 lg:scale-100 origin-center ${
+              hovered ? 'scale-110 -translate-y-1' : 'opacity-95'
             }`}
           >
-            <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-stone-950/90 text-white backdrop-blur-md border border-orange-500/50 shadow-xl">
-              <span className="w-2 h-2 rounded-full bg-orange-400 animate-ping" />
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg sm:rounded-xl bg-stone-950/90 text-white backdrop-blur-md border border-orange-500/50 shadow-xl whitespace-nowrap">
+              <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-orange-400 animate-ping shrink-0" />
               <div className="flex flex-col">
-                <span className="font-extrabold text-[11px] tracking-wider uppercase text-orange-400">
+                <span className="font-extrabold text-[9px] sm:text-[11px] tracking-wider uppercase text-orange-400">
                   Kitchen KDS
                 </span>
-                <span className="text-[9px] text-stone-400 font-mono">
+                <span className="text-[8px] sm:text-[9px] text-stone-400 font-mono hidden sm:inline">
                   {activeOrdersCount} Live Tickets
                 </span>
               </div>
-              <span className="text-[9px] bg-orange-500/20 text-orange-200 px-1.5 py-0.5 rounded-md font-mono font-bold border border-orange-500/30">
+              <span className="hidden md:inline text-[9px] bg-orange-500/20 text-orange-200 px-1.5 py-0.5 rounded-md font-mono font-bold border border-orange-500/30">
                 Click
               </span>
             </div>

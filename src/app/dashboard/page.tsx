@@ -302,16 +302,16 @@ export default function DashboardPage() {
         </div>
       ) : (
         /* Full 2D Operations Dashboard Mode */
-        <div className="w-full h-full overflow-y-auto p-6 space-y-6 text-stone-100 bg-stone-950">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-800 pb-4">
+        <div className="w-full h-full overflow-y-auto p-3.5 sm:p-6 space-y-4 sm:space-y-6 text-stone-100 bg-stone-950 no-scrollbar">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-stone-800 pb-3 sm:pb-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-2">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-amber-500/20 text-amber-300 text-[11px] sm:text-xs font-semibold mb-1.5 sm:mb-2">
                 <Sparkles className="w-3.5 h-3.5" /> 2D Enterprise Operations View
               </div>
-              <h1 className="text-2xl font-extrabold text-white tracking-tight">
+              <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                 CAFE OS HQ • Nordic Roast & Bakery
               </h1>
-              <p className="text-xs text-stone-400">
+              <p className="text-[11px] sm:text-xs text-stone-400">
                 Full-feature 2D mode for maximum performance and touch control
               </p>
             </div>
@@ -319,7 +319,7 @@ export default function DashboardPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIs2DMode(false)}
-                className="px-4 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-extrabold text-xs rounded-xl shadow-lg shadow-amber-600/30 transition flex items-center gap-2"
+                className="px-3.5 sm:px-4 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-extrabold text-xs rounded-xl shadow-lg shadow-amber-600/30 transition flex items-center gap-2"
               >
                 <Eye className="w-4 h-4" /> Enter 3D Spatial Cafe
               </button>
@@ -327,7 +327,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Quick Access Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
             {[
               { id: 'POS', label: 'POS Terminal', icon: Receipt, desc: 'Ring up orders', color: 'bg-amber-600/20 text-amber-400 border-amber-500/30' },
               { id: 'TABLES', label: 'Tables & Floor', icon: TableProperties, desc: 'Floor occupancy', color: 'bg-emerald-600/20 text-emerald-400 border-emerald-500/30' },
@@ -343,30 +343,30 @@ export default function DashboardPage() {
                 <div
                   key={card.id}
                   onClick={() => setActiveModule(card.id)}
-                  className="bg-stone-900/90 border border-stone-800 hover:border-amber-500/50 p-4 rounded-2xl cursor-pointer hover:bg-stone-850 transition duration-150 shadow-md group"
+                  className="bg-stone-900/90 border border-stone-800 hover:border-amber-500/50 p-3 sm:p-4 rounded-xl sm:rounded-2xl cursor-pointer hover:bg-stone-850 transition duration-150 shadow-md group"
                 >
-                  <div className={`w-10 h-10 rounded-xl ${card.color} border flex items-center justify-center mb-3 group-hover:scale-110 transition`}>
-                    <Icon className="w-5 h-5" />
+                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl ${card.color} border flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition`}>
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <h3 className="font-extrabold text-sm text-stone-100 group-hover:text-amber-400 transition">
+                  <h3 className="font-extrabold text-xs sm:text-sm text-stone-100 group-hover:text-amber-400 transition">
                     {card.label}
                   </h3>
-                  <p className="text-[11px] text-stone-400 mt-0.5">{card.desc}</p>
+                  <p className="text-[10px] sm:text-[11px] text-stone-400 mt-0.5 line-clamp-1">{card.desc}</p>
                 </div>
               );
             })}
           </div>
 
           {/* Tables Overview Grid in 2D Mode */}
-          <div className="bg-stone-900/80 p-5 rounded-3xl border border-stone-800 space-y-4">
+          <div className="bg-stone-900/80 p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl border border-stone-800 space-y-3 sm:space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="font-extrabold text-base text-white">Live Floor Tables Status</h2>
-              <span className="text-xs text-amber-400 font-mono font-bold">
+              <h2 className="font-extrabold text-sm sm:text-base text-white">Live Floor Tables Status</h2>
+              <span className="text-[11px] sm:text-xs text-amber-400 font-mono font-bold">
                 {tables.filter((t) => t.status === 'OCCUPIED').length} of {tables.length} Occupied
               </span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
               {tables.map((t) => (
                 <div
                   key={t.id}

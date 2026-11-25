@@ -99,22 +99,22 @@ export default function CafeOsHomePage() {
     <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col selection:bg-amber-500 selection:text-black">
       {/* Top Glass Navigation Header */}
       <header className="sticky top-0 z-50 bg-stone-950/80 backdrop-blur-xl border-b border-stone-850">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           {/* Logo & Brand Identity */}
-          <div className="flex items-center gap-3.5">
-            <div className="h-11 w-11 rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-700 flex items-center justify-center text-white shadow-xl shadow-amber-600/30">
-              <Coffee className="w-6 h-6" />
+          <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+            <div className="h-9 w-9 sm:h-11 sm:w-11 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-700 flex items-center justify-center text-white shadow-xl shadow-amber-600/30 shrink-0">
+              <Coffee className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-2xl tracking-tight text-white">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="font-extrabold text-xl sm:text-2xl tracking-tight text-white whitespace-nowrap">
                   CAFE <span className="text-amber-400">OS</span>
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30 uppercase tracking-widest font-bold">
+                <span className="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30 uppercase tracking-widest font-bold">
                   3D AI Platform
                 </span>
               </div>
-              <p className="text-[11px] text-stone-400 tracking-wide">
+              <p className="text-[11px] text-stone-400 tracking-wide truncate hidden md:block">
                 Immersive Hospitality Management Ecosystem
               </p>
             </div>
@@ -140,31 +140,31 @@ export default function CafeOsHomePage() {
           </nav>
 
           {/* Launch Buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <Link
               href="/login"
-              className="text-xs font-bold px-4 py-2.5 text-stone-300 hover:text-white hover:bg-stone-900 rounded-xl transition"
+              className="text-xs font-bold px-2.5 py-2 sm:px-4 sm:py-2.5 text-stone-300 hover:text-white hover:bg-stone-900 rounded-xl transition"
             >
               Sign In
             </Link>
             <Link
               href="/dashboard"
-              className="text-xs font-extrabold px-5 py-2.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white rounded-xl shadow-lg shadow-amber-600/30 transition flex items-center gap-2"
+              className="text-xs font-extrabold px-3 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white rounded-xl shadow-lg shadow-amber-600/30 transition flex items-center gap-1.5 sm:gap-2 whitespace-nowrap"
             >
-              Launch 3D HQ <ArrowRight className="w-4 h-4" />
+              <span className="hidden xs:inline">Launch </span>3D HQ <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </Link>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-16 pb-20 overflow-hidden border-b border-stone-850">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
+      <section className="relative pt-10 sm:pt-16 pb-14 sm:pb-20 overflow-hidden border-b border-stone-850">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-4 sm:space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] sm:text-xs font-bold">
             <Sparkles className="w-3.5 h-3.5" /> Next-Generation 3D Spatial Hospitality Software
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight max-w-5xl mx-auto leading-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white tracking-tight max-w-5xl mx-auto leading-tight">
             Step Into Your{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500">
               3D Digital Cafe
@@ -172,78 +172,81 @@ export default function CafeOsHomePage() {
             Headquarters.
           </h1>
 
-          <p className="text-base sm:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-lg lg:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed px-2">
             A complete, futuristic hospitality management ecosystem combining an interactive 3D cafe environment with enterprise POS, recipe-based ingredient inventory, kitchen display systems, live table allocations, and an AI business co-pilot.
           </p>
 
           {/* Direct Portals Launch Ribbon */}
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
+          <div className="pt-2 sm:pt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             <Link
               href="/dashboard"
-              className="px-7 py-3.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-extrabold rounded-2xl shadow-xl shadow-amber-600/30 transition flex items-center gap-2.5 text-sm"
+              className="w-full sm:w-auto px-5 sm:px-7 py-3 sm:py-3.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-extrabold rounded-2xl shadow-xl shadow-amber-600/30 transition flex items-center justify-center gap-2.5 text-xs sm:text-sm"
             >
-              <Eye className="w-5 h-5" /> Enter 3D Digital Headquarters
+              <Eye className="w-4 h-4 sm:w-5 sm:h-5" /> Enter 3D Digital Headquarters
             </Link>
             <Link
               href="/dashboard/pos"
-              className="px-6 py-3.5 bg-stone-900 hover:bg-stone-850 border border-stone-800 text-stone-200 font-bold rounded-2xl shadow-md transition flex items-center gap-2 text-sm"
+              className="flex-1 sm:flex-initial px-4 sm:px-6 py-3 sm:py-3.5 bg-stone-900 hover:bg-stone-850 border border-stone-800 text-stone-200 font-bold rounded-2xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm whitespace-nowrap"
             >
-              <Receipt className="w-5 h-5 text-amber-400" /> POS Terminal
+              <Receipt className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" /> POS Terminal
             </Link>
             <Link
               href="/kitchen"
-              className="px-6 py-3.5 bg-stone-900 hover:bg-stone-850 border border-stone-800 text-stone-200 font-bold rounded-2xl shadow-md transition flex items-center gap-2 text-sm"
+              className="flex-1 sm:flex-initial px-4 sm:px-6 py-3 sm:py-3.5 bg-stone-900 hover:bg-stone-850 border border-stone-800 text-stone-200 font-bold rounded-2xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm whitespace-nowrap"
             >
-              <ChefHat className="w-5 h-5 text-orange-400" /> Kitchen KDS
+              <ChefHat className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" /> Kitchen KDS
             </Link>
             <Link
               href="/dashboard/ai"
-              className="px-6 py-3.5 bg-purple-950/40 hover:bg-purple-900/40 border border-purple-500/30 text-purple-200 font-bold rounded-2xl shadow-md transition flex items-center gap-2 text-sm"
+              className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-3.5 bg-purple-950/40 hover:bg-purple-900/40 border border-purple-500/30 text-purple-200 font-bold rounded-2xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm whitespace-nowrap"
             >
-              <Bot className="w-5 h-5 text-purple-400" /> AI Business Co-Pilot
+              <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" /> AI Business Co-Pilot
             </Link>
           </div>
         </div>
 
         {/* Embedded Interactive 3D Spatial Canvas Hero Viewport */}
-        <div id="3d-experience" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-          <div className="relative rounded-3xl overflow-hidden border border-stone-800 shadow-2xl bg-stone-950 h-[560px]">
-            {/* Overlay Camera Preset Toolbar */}
-            <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-1 bg-stone-950/85 backdrop-blur-md p-1.5 rounded-2xl border border-stone-800">
-              <span className="text-[10px] font-bold text-stone-500 uppercase px-2 py-1 flex items-center">
-                Camera:
-              </span>
-              {[
-                { id: 'OVERVIEW', label: 'Overview' },
-                { id: 'COUNTER_POS', label: 'Counter & POS' },
-                { id: 'DINING_FLOOR', label: 'Dining Floor' },
-                { id: 'KITCHEN', label: 'Kitchen KDS' },
-                { id: 'INVENTORY', label: 'Inventory' },
-                { id: 'OFFICE', label: 'Executive Office' },
-                { id: 'TOP_DOWN', label: 'Tactical View' },
-              ].map((p) => (
-                <button
-                  key={p.id}
-                  onClick={() => setActivePreset(p.id)}
-                  className={`px-2.5 py-1 rounded-xl text-xs font-bold transition ${
-                    activePreset === p.id
-                      ? 'bg-amber-600 text-white shadow'
-                      : 'text-stone-400 hover:text-stone-200 hover:bg-stone-850'
-                  }`}
-                >
-                  {p.label}
-                </button>
-              ))}
-            </div>
+        <div id="3d-experience" className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mt-8 sm:mt-12">
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-stone-800 shadow-2xl bg-stone-950 h-[440px] sm:h-[500px] lg:h-[560px]">
+            {/* Unified Responsive Top Overlay Toolbar */}
+            <div className="absolute top-2.5 sm:top-4 inset-x-2.5 sm:inset-x-4 z-20 flex items-center justify-between gap-2 pointer-events-none">
+              {/* Overlay Camera Preset Toolbar */}
+              <div className="pointer-events-auto flex items-center gap-1 bg-stone-950/90 backdrop-blur-md p-1 sm:p-1.5 rounded-xl sm:rounded-2xl border border-stone-800 overflow-x-auto no-scrollbar shrink min-w-0">
+                <span className="text-[9px] sm:text-[10px] font-bold text-stone-500 uppercase px-1.5 sm:px-2 py-1 hidden sm:flex items-center shrink-0">
+                  Camera:
+                </span>
+                {[
+                  { id: 'OVERVIEW', label: 'Overview' },
+                  { id: 'COUNTER_POS', label: 'Counter & POS' },
+                  { id: 'DINING_FLOOR', label: 'Dining Floor' },
+                  { id: 'KITCHEN', label: 'Kitchen KDS' },
+                  { id: 'INVENTORY', label: 'Inventory' },
+                  { id: 'OFFICE', label: 'Executive Office' },
+                  { id: 'TOP_DOWN', label: 'Tactical View' },
+                ].map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => setActivePreset(p.id)}
+                    className={`px-2 sm:px-2.5 py-1 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold transition whitespace-nowrap shrink-0 ${
+                      activePreset === p.id
+                        ? 'bg-amber-600 text-white shadow'
+                        : 'text-stone-400 hover:text-stone-200 hover:bg-stone-850'
+                    }`}
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
 
-            {/* Direct Launch Pill Overlay */}
-            <div className="absolute top-4 right-4 z-20">
-              <Link
-                href="/dashboard"
-                className="px-4 py-2 bg-amber-600/90 hover:bg-amber-500 text-white text-xs font-extrabold rounded-2xl backdrop-blur-md shadow-xl flex items-center gap-1.5 transition"
-              >
-                Expand Full Screen 3D Cockpit <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              {/* Direct Launch Pill Overlay */}
+              <div className="pointer-events-auto shrink-0">
+                <Link
+                  href="/dashboard"
+                  className="px-2.5 sm:px-4 py-1.5 sm:py-2 bg-amber-600/95 hover:bg-amber-500 text-white text-[10px] sm:text-xs font-extrabold rounded-xl sm:rounded-2xl backdrop-blur-md shadow-xl flex items-center gap-1 sm:gap-1.5 transition whitespace-nowrap"
+                >
+                  <span className="hidden sm:inline">Expand Full Screen </span>3D Cockpit <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+                </Link>
+              </div>
             </div>
 
             {/* Live 3D Scene */}

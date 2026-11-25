@@ -86,15 +86,15 @@ export default function DashboardAnalyticsPage() {
       </div>
 
       {/* 7-Day Revenue Trend Graph Representation */}
-      <div className="bg-stone-900/90 p-6 rounded-2xl border border-stone-800 shadow-xl space-y-4">
+      <div className="bg-stone-900/90 p-4 sm:p-6 rounded-2xl border border-stone-800 shadow-xl space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="font-extrabold text-base text-stone-100">Weekly Revenue Breakdown</h2>
+          <h2 className="font-extrabold text-sm sm:text-base text-stone-100">Weekly Revenue Breakdown</h2>
           <span className="text-xs text-stone-400 flex items-center gap-1 font-mono">
             <Calendar className="w-3.5 h-3.5 text-amber-400" /> Last 7 Days
           </span>
         </div>
 
-        <div className="grid grid-cols-7 gap-3 pt-6 items-end h-48 border-b border-stone-800 pb-4">
+        <div className="grid grid-cols-7 gap-1.5 sm:gap-3 pt-6 items-end h-48 border-b border-stone-800 pb-4">
           {revenueTrend.map((day: any) => {
             const heightPercent = Math.min(100, Math.max(20, (day.revenue / 3500) * 100));
             return (

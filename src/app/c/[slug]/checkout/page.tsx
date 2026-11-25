@@ -272,8 +272,8 @@ export default function CustomerCheckoutPage({ params }: { params: { slug: strin
           >
             <ArrowLeft className="w-4 h-4" /> Back to Menu
           </Link>
-          <span className="font-serif font-bold text-base text-white tracking-wide">
-            {cafe?.name || 'Nordic Roast & Bakery'} • Secure Checkout
+          <span className="font-serif font-bold text-xs sm:text-base text-white tracking-wide truncate max-w-[180px] sm:max-w-none">
+            <span className="hidden sm:inline">{cafe?.name || 'Nordic Roast'} • </span>Checkout
           </span>
           <div className="w-12" />
         </div>

@@ -214,17 +214,17 @@ export function CafeInteriorMesh({ onSelectZone, reservationCount = 4 }: CafeInt
         {/* Spatial Floating Label */}
         <Html position={[0, 0, 0.18]} center distanceFactor={22}>
           <div
-            className={`cursor-pointer transition-all duration-300 transform select-none ${
-              hoveredZone === 'MENU' ? 'scale-110 -translate-y-1' : 'scale-100'
+            className={`cursor-pointer transition-all duration-300 transform select-none scale-[0.65] sm:scale-80 md:scale-95 lg:scale-100 origin-center ${
+              hoveredZone === 'MENU' ? 'scale-110 -translate-y-1' : ''
             }`}
           >
-            <div className="flex flex-col items-center px-3 py-1.5 rounded-xl bg-stone-950/95 text-stone-100 border border-amber-500/50 shadow-xl backdrop-blur-md">
-              <span className="font-extrabold text-[11px] tracking-wider uppercase text-amber-300 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                Artisan Menu & Recipes
+            <div className="flex flex-col items-center px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl bg-stone-950/95 text-stone-100 border border-amber-500/50 shadow-xl backdrop-blur-md whitespace-nowrap">
+              <span className="font-extrabold text-[9px] sm:text-[11px] tracking-wider uppercase text-amber-300 flex items-center gap-1 sm:gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
+                Artisan Menu
               </span>
-              <span className="text-[9px] text-stone-400 font-mono mt-0.5">
-                Catalog • Dynamic Pricing • Margin Engine
+              <span className="text-[8px] sm:text-[9px] text-stone-400 font-mono mt-0.5 hidden sm:block">
+                Catalog • Dynamic Pricing • Margins
               </span>
             </div>
           </div>
@@ -273,16 +273,16 @@ export function CafeInteriorMesh({ onSelectZone, reservationCount = 4 }: CafeInt
 
         <Html position={[0, 1.9, 0]} center distanceFactor={22}>
           <div
-            className={`cursor-pointer transition-all duration-300 transform select-none ${
-              hoveredZone === 'RESERVATIONS' ? 'scale-110 -translate-y-1' : 'scale-100'
+            className={`cursor-pointer transition-all duration-300 transform select-none scale-[0.65] sm:scale-80 md:scale-95 lg:scale-100 origin-center ${
+              hoveredZone === 'RESERVATIONS' ? 'scale-110 -translate-y-1' : ''
             }`}
           >
-            <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-stone-950/95 text-stone-100 border border-amber-500/40 shadow-xl backdrop-blur-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg sm:rounded-xl bg-stone-950/95 text-stone-100 border border-amber-500/40 shadow-xl backdrop-blur-md whitespace-nowrap">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
               <div>
-                <div className="font-extrabold text-[11px] text-white">RESERVATIONS & HOST</div>
-                <div className="text-[9px] text-amber-300 font-mono">
-                  {reservationCount} Active Bookings • Seating Queue
+                <div className="font-extrabold text-[9px] sm:text-[11px] text-white">RESERVATIONS</div>
+                <div className="text-[8px] sm:text-[9px] text-amber-300 font-mono hidden sm:block">
+                  {reservationCount} Active Bookings
                 </div>
               </div>
             </div>
@@ -325,15 +325,15 @@ export function CafeInteriorMesh({ onSelectZone, reservationCount = 4 }: CafeInt
 
         <Html position={[0, 2.3, 0]} center distanceFactor={14}>
           <div
-            className={`cursor-pointer transition-all duration-300 transform select-none ${
-              hoveredZone === 'STAFF' ? 'scale-110 -translate-y-1' : 'scale-100'
+            className={`cursor-pointer transition-all duration-300 transform select-none scale-[0.65] sm:scale-80 md:scale-95 lg:scale-100 origin-center ${
+              hoveredZone === 'STAFF' ? 'scale-110 -translate-y-1' : ''
             }`}
           >
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-stone-950/95 text-stone-100 border border-emerald-500/40 shadow-2xl backdrop-blur-xl">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 py-1 sm:px-3.5 sm:py-1.5 rounded-xl sm:rounded-2xl bg-stone-950/95 text-stone-100 border border-emerald-500/40 shadow-2xl backdrop-blur-xl whitespace-nowrap">
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-400 shrink-0" />
               <div>
-                <div className="font-extrabold text-xs text-white">STAFF & SHIFTS</div>
-                <div className="text-[10px] text-emerald-300 font-mono">Clock-In • Performance</div>
+                <div className="font-extrabold text-[10px] sm:text-xs text-white">STAFF & SHIFTS</div>
+                <div className="text-[8px] sm:text-[10px] text-emerald-300 font-mono hidden sm:block">Clock-In • Performance</div>
               </div>
             </div>
           </div>

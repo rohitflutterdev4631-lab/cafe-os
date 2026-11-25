@@ -111,11 +111,11 @@ export default function DashboardQrCodesPage() {
                   <div
                     key={qr.id}
                     onClick={() => setSelectedQr(qr)}
-                    className={`p-4 transition cursor-pointer flex items-center justify-between gap-4 ${
+                    className={`p-3 sm:p-4 transition cursor-pointer flex items-center justify-between gap-2 sm:gap-4 ${
                       isSelected ? 'bg-amber-500/10 border-l-4 border-l-amber-500' : 'hover:bg-stone-850'
                     }`}
                   >
-                    <div className="flex items-center gap-4 min-w-0">
+                    <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
                       <img
                         src={qr.dataUrl}
                         alt="QR Code"

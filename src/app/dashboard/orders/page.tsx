@@ -201,7 +201,7 @@ export default function DashboardOrdersPage() {
 
       {/* Status Filter Tabs (List Mode) */}
       {viewMode === 'list' && (
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-stone-850 text-sm">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 border-b border-stone-850 text-sm">
           {['ALL', 'PENDING', 'ACCEPTED', 'PREPARING', 'READY', 'COMPLETED', 'REJECTED'].map((tab) => {
             const count = tab === 'ALL' ? orders.length : orders.filter((o) => o.status === tab).length;
             return (

@@ -287,7 +287,7 @@ export default function KitchenKDSPage() {
       {/* 2. SUB-NAVIGATION & SEARCH BAR */}
       <div className="bg-stone-950/80 border-b border-stone-850 px-4 sm:px-6 py-2.5 flex flex-col md:flex-row md:items-center justify-between gap-3 backdrop-blur-md">
         {/* Status Navigation Tabs with Counts */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs font-bold">
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs font-bold">
           {[
             { id: 'ALL', label: 'All Orders', count: activeCount },
             { id: 'PENDING', label: 'New Tickets', count: pendingCount, highlight: pendingCount > 0 },

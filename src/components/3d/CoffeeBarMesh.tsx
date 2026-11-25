@@ -335,21 +335,21 @@ export function CoffeeBarMesh({ onSelectZone, activeOrdersCount = 4 }: CoffeeBar
         {/* Floating Apple Vision Pro Style Spatial Context Tooltip */}
         <Html position={[0, 2.1, 0]} center distanceFactor={22}>
           <div
-            className={`pointer-events-none transition-all duration-300 transform select-none ${
-              hovered ? 'scale-110 -translate-y-1' : 'scale-100 opacity-90'
+            className={`pointer-events-none transition-all duration-300 transform select-none scale-[0.65] sm:scale-80 md:scale-95 lg:scale-100 origin-center ${
+              hovered ? 'scale-110 -translate-y-1' : 'opacity-90'
             }`}
           >
-            <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-stone-950/90 text-white backdrop-blur-md border border-amber-500/50 shadow-xl">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg sm:rounded-xl bg-stone-950/90 text-white backdrop-blur-md border border-amber-500/50 shadow-xl whitespace-nowrap">
+              <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               <div className="flex flex-col">
-                <span className="font-extrabold text-[11px] tracking-wider uppercase text-amber-300">
+                <span className="font-extrabold text-[9px] sm:text-[11px] tracking-wider uppercase text-amber-300">
                   POS & Cashier
                 </span>
-                <span className="text-[9px] text-stone-400 font-mono">
+                <span className="text-[8px] sm:text-[9px] text-stone-400 font-mono hidden sm:inline">
                   {activeOrdersCount} Active Tabs
                 </span>
               </div>
-              <span className="text-[9px] bg-amber-500/20 text-amber-200 px-1.5 py-0.5 rounded-md font-mono font-bold border border-amber-500/30">
+              <span className="hidden md:inline text-[9px] bg-amber-500/20 text-amber-200 px-1.5 py-0.5 rounded-md font-mono font-bold border border-amber-500/30">
                 Click
               </span>
             </div>

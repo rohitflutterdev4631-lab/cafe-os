@@ -127,43 +127,54 @@ export function ReservationPanel({ onClose }: ReservationPanelProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
-      <div className="bg-stone-900 border border-stone-800 rounded-3xl w-full max-w-6xl h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
+      <div className="bg-stone-900 border border-stone-800 rounded-2xl sm:rounded-3xl w-full max-w-6xl h-[94vh] sm:h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-stone-800 flex items-center justify-between bg-stone-950/70">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/30">
-              <Calendar className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-lg text-white tracking-tight">
-                  RESERVATIONS & WAITLIST
-                </h1>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                  {reservations.length} Active Bookings
-                </span>
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-stone-850 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-stone-950/70">
+          <div className="flex items-center justify-between gap-3 min-w-0">
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/30 shrink-0">
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <p className="text-xs text-stone-400">Guest seating schedules, floor allocations & queue notifications</p>
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <h1 className="font-extrabold text-sm sm:text-lg text-white tracking-tight whitespace-nowrap">
+                    RESERVATIONS
+                  </h1>
+                  <span className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 whitespace-nowrap">
+                    {reservations.length} Active
+                  </span>
+                </div>
+                <p className="text-[10px] sm:text-xs text-stone-400 truncate hidden sm:block">Guest seating schedules, floor allocations & queue notifications</p>
+              </div>
             </div>
+
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="md:hidden w-8 h-8 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition shrink-0"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="flex bg-stone-800 p-1 rounded-xl border border-stone-700/60">
+          <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar shrink-0">
+            <div className="flex bg-stone-800 p-0.5 sm:p-1 rounded-xl border border-stone-700/60 shrink-0">
               <button
                 onClick={() => setActiveTab('RESERVATIONS')}
-                className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
+                className={`px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition whitespace-nowrap ${
                   activeTab === 'RESERVATIONS' ? 'bg-blue-600 text-white' : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                Table Bookings ({reservations.length})
+                Bookings ({reservations.length})
               </button>
               <button
                 onClick={() => setActiveTab('WAITLIST')}
-                className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
+                className={`px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition whitespace-nowrap ${
                   activeTab === 'WAITLIST' ? 'bg-blue-600 text-white' : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                Live Waitlist ({waitlist.length})
+                Waitlist ({waitlist.length})
               </button>
             </div>
 
@@ -172,15 +183,15 @@ export function ReservationPanel({ onClose }: ReservationPanelProps) {
                 setIsWaitlistForm(activeTab === 'WAITLIST');
                 setShowAddModal(true);
               }}
-              className="px-3.5 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-md transition flex items-center gap-1.5"
+              className="px-3 sm:px-3.5 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-[11px] sm:text-xs rounded-xl shadow-md transition flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <Plus className="w-3.5 h-3.5" /> New {activeTab === 'WAITLIST' ? 'Waitlist' : 'Reservation'}
+              <Plus className="w-3.5 h-3.5" /> <span className="hidden xs:inline">New </span>{activeTab === 'WAITLIST' ? 'Waitlist' : 'Booking'}
             </button>
 
             {onClose && (
               <button
                 onClick={onClose}
-                className="w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
+                className="hidden md:flex w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 items-center justify-center text-stone-400 hover:text-white transition shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -189,7 +200,7 @@ export function ReservationPanel({ onClose }: ReservationPanelProps) {
         </div>
 
         {/* Content Body */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
           {activeTab === 'RESERVATIONS' && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {reservations.map((r) => {

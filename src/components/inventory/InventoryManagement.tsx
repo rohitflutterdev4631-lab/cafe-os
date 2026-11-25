@@ -110,35 +110,46 @@ export function InventoryManagement({ onClose, onOpenPurchaseOrders }: Inventory
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4 animate-in fade-in duration-200">
-      <div className="bg-stone-900 border border-stone-800 rounded-3xl w-full max-w-6xl h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
+      <div className="bg-stone-900 border border-stone-800 rounded-2xl sm:rounded-3xl w-full max-w-6xl h-[94vh] sm:h-[92vh] flex flex-col overflow-hidden shadow-2xl text-stone-100">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-stone-800 flex items-center justify-between bg-stone-950/60">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-600/30">
-              <Package className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-lg text-white tracking-tight">
-                  INVENTORY & RECIPES
-                </h1>
-                {metrics.lowStockCount > 0 && (
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
-                    <AlertTriangle className="w-3 h-3" /> {metrics.lowStockCount} Reorder Alerts
-                  </span>
-                )}
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-stone-850 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-stone-950/70">
+          <div className="flex items-center justify-between gap-3 min-w-0">
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-600/30 shrink-0">
+                <Package className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <p className="text-xs text-stone-400">
-                Ingredient tracking, automated recipe deductions, & supplier purchasing
-              </p>
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <h1 className="font-extrabold text-sm sm:text-lg text-white tracking-tight whitespace-nowrap">
+                    INVENTORY & RECIPES
+                  </h1>
+                  {metrics.lowStockCount > 0 && (
+                    <span className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1 whitespace-nowrap">
+                      <AlertTriangle className="w-3 h-3" /> {metrics.lowStockCount} Alerts
+                    </span>
+                  )}
+                </div>
+                <p className="text-[10px] sm:text-xs text-stone-400 truncate hidden sm:block">
+                  Ingredient tracking, automated recipe deductions, & supplier purchasing
+                </p>
+              </div>
             </div>
+
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="sm:hidden w-8 h-8 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition shrink-0"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="flex bg-stone-800/80 p-1 rounded-xl border border-stone-700/60">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <div className="flex bg-stone-800/80 p-0.5 sm:p-1 rounded-xl border border-stone-700/60">
               <button
                 onClick={() => setActiveTab('STOCK')}
-                className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
+                className={`px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition whitespace-nowrap ${
                   activeTab === 'STOCK' ? 'bg-emerald-600 text-white' : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
@@ -146,7 +157,7 @@ export function InventoryManagement({ onClose, onOpenPurchaseOrders }: Inventory
               </button>
               <button
                 onClick={() => setActiveTab('RECIPES')}
-                className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
+                className={`px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition whitespace-nowrap ${
                   activeTab === 'RECIPES' ? 'bg-emerald-600 text-white' : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
@@ -157,7 +168,7 @@ export function InventoryManagement({ onClose, onOpenPurchaseOrders }: Inventory
             {onClose && (
               <button
                 onClick={onClose}
-                className="w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-400 hover:text-white transition"
+                className="hidden sm:flex w-9 h-9 rounded-xl bg-stone-800 hover:bg-stone-700 items-center justify-center text-stone-400 hover:text-white transition shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -166,46 +177,46 @@ export function InventoryManagement({ onClose, onOpenPurchaseOrders }: Inventory
         </div>
 
         {/* Metrics Row */}
-        <div className="p-4 grid grid-cols-3 gap-4 border-b border-stone-800 bg-stone-950/40">
-          <div className="bg-stone-900/80 p-3.5 rounded-2xl border border-stone-800 flex items-center justify-between">
+        <div className="p-3 sm:p-4 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 border-b border-stone-850 bg-stone-950/40">
+          <div className="bg-stone-900/80 p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-stone-800 flex items-center justify-between">
             <div>
-              <span className="text-[10px] uppercase font-bold text-stone-500 tracking-wider">
+              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-stone-500 tracking-wider">
                 Total Ingredients
               </span>
-              <div className="text-xl font-extrabold text-white mt-0.5">
+              <div className="text-base sm:text-xl font-extrabold text-white mt-0.5">
                 {metrics.totalItems} Items
               </div>
             </div>
-            <div className="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
-              <Package className="w-5 h-5" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+              <Package className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </div>
 
-          <div className="bg-stone-900/80 p-3.5 rounded-2xl border border-stone-800 flex items-center justify-between">
+          <div className="bg-stone-900/80 p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-stone-800 flex items-center justify-between">
             <div>
-              <span className="text-[10px] uppercase font-bold text-stone-500 tracking-wider">
+              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-stone-500 tracking-wider">
                 Low Stock Thresholds
               </span>
-              <div className="text-xl font-extrabold text-amber-400 mt-0.5">
+              <div className="text-base sm:text-xl font-extrabold text-amber-400 mt-0.5">
                 {metrics.lowStockCount} Items
               </div>
             </div>
-            <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
-              <AlertTriangle className="w-5 h-5" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+              <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </div>
 
-          <div className="bg-stone-900/80 p-3.5 rounded-2xl border border-stone-800 flex items-center justify-between">
+          <div className="bg-stone-900/80 p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-stone-800 flex items-center justify-between">
             <div>
-              <span className="text-[10px] uppercase font-bold text-stone-500 tracking-wider">
+              <span className="text-[9px] sm:text-[10px] uppercase font-bold text-stone-500 tracking-wider">
                 Inventory Valuation
               </span>
-              <div className="text-xl font-extrabold text-emerald-400 mt-0.5 font-mono">
+              <div className="text-base sm:text-xl font-extrabold text-emerald-400 mt-0.5 font-mono">
                 ₹{metrics.totalValuation.toLocaleString()}
               </div>
             </div>
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
-              <DollarSign className="w-5 h-5" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+              <DollarSign className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </div>
         </div>
